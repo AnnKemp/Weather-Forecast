@@ -1,4 +1,7 @@
 (() => {
+    //7169f5bedeb8da197f07b8c4e02cde4d // de personal key uit de mail
+    // 7c998263790686fb082bdb3d6a532182    // my personal key for weather app
+
     // luisteren naar de klik op de knop
     document.getElementById("run").addEventListener("click", function(){
 
@@ -7,7 +10,7 @@
         let country=document.getElementById("country").value;
 
         // het opsplitsen van de api-link om zo een stad naar keuze te kunnen toevoegen/selecteren
-        let city="q="+ciety+","+country;
+        let city="q="+ciety+","+country+"&units=metric";
         let key="&APPID=7169f5bedeb8da197f07b8c4e02cde4d";
         let start="http://api.openweathermap.org/data/2.5/weather?"
 
@@ -23,19 +26,44 @@
 
             .then((data) => {
                 console.log(data);
+                document.getElementById("forcast-title").innerHTML="Weather in "+ciety+", "+country;
+                document.getElementById("weather-description").innerHTML=data.weather[0].description;
+                document.getElementById("degrees").innerHTML=data.main.temp+" °C, feels like: "+data.main.feels_like+" °C";
+// alles in een var steken en dan onclick tonen
+/*
+               let tabell="<table><tr><td>wind</td><td>"++"</td></tr> // er nog uithalen
+                <tr><td>Cloudiness</td><td>"+data[0].description+"</td></tr> // nog eens checken
+                <tr><td>Pressure</td><td>"+main.pressure+" hpa</td></tr>
+                <tr><td>Humidity</td><td>"+data.main.humidity+" %</td></tr>
+                <tr><td>Rain</td><td>"+data.weather[0].description+"</td></tr>
+                <tr><td>Sunrise</td><td>"++"</td></tr>
+                <tr><td>Sunset</td><td>"++"</td></tr>
+                <tr><td>Geo coord</td><td>lon.: "++"lat.: "++"</td></tr></table>"; */
+
+              //  document.getElementById("tabel").innerHTML=tabell;
+
+             /*   letweektabel="<table><tr><td>city.city.timezone</td><td>min temp: "+data.main.temp_min+"C°, max temp "+data.main.temp_max+"C°</td></tr></table>" // dit kan eigenlijk ook in een lus
+                              <tr><td></td><td></td></tr>
+                               <tr><td></td><td></td></tr>
+                               <tr><td></td><td></td></tr>
+                               <tr><td></td><td></td></tr>ls
+                               
+                </table>" */
+                alert(data.coord.lon);
+
+                alert(data.main.humidity+" %");
+                alert(data.main.pressure+" %");
+                //alert(data.0.description);
             });
 
-        //7169f5bedeb8da197f07b8c4e02cde4d // de personal key uit de mail
-        // 7c998263790686fb082bdb3d6a532182    // my personal key for weather app
+
+      // nog schrijven: indien niets ingevuld in invulveld: errorr melding geven
 
         //api.openweathermap.org/data/2.5/find?q=London&units=metric //voorbeeld voor het ophalen van temperatuur in celsius
-
-
 
         //-------------------------------for working with axios ---------------------------------------------------------------------------------------------------
 //will now provide autocomplete and parameter typings
         /*
-
                 const axios = require('axios');
 
         // Make a request for a user with a given ID
