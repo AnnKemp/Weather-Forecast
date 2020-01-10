@@ -4,28 +4,50 @@
     <meta charset="UTF-8" />
     <title>BeCode/JavaScript - individual challenge</title>
    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <style>
+        body{
+            padding-left:5%;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        table {
+            border:1px black solid;
+            width: 30%;
+          box-shadow: #245060;
+        }
+        td{
+            padding-left: 10px;
+        }
+tr:nth-child(even) {
+    background: #eee;
+}
+tr:nth-child(odd) {
+    background: #FFF;
+}
+    </style>
 </head>
 <body>
 <div class="container">
     <header>
         <h1>Current weather and forecasts in your city</h1>
+        <section class="form">
+        <form action="#" method="post">
+            <div class="field dob">
+                <label for="city">Enter your city of choice here:</label>
+                <input type="text" name="name" id="city" size="12" placeholder="Brussels" /> and your country here: <input type="text" name="name" id="country" size="3" placeholder="be" />
+            </div>
+            <div class="actions">
+                <button type="button" id="run">Run the script</button>
+            </div>
+        </form>
+        </section>
     </header>
     <div class="content">
         <H1 id="forcast-title"></H1>
         <H3 id="degrees"></H3>
         <p id="weather-description"></p>
         <div id="tabel"></div>
-        <section class="form">
-            <form action="#" method="post">
-                <div class="field dob">
-                    <label for="city">Enter your city of choice here:</label>
-                    <input type="text" name="name" id="city" size="12" placeholder="Brussels" /> and your country here: <input type="text" name="name" id="country" size="3" placeholder="be" />
-                </div>
-                <div class="actions">
-                    <button type="button" id="run">Run the script</button>
-                </div>
-            </form>
-        </section>
+
+
     </div>
 </div>
 <script src="weather.js"></script>
