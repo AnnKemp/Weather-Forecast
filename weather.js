@@ -26,34 +26,25 @@
 
             .then((data) => {
                 console.log(data);
+                country = country.toUpperCase();
                 document.getElementById("forcast-title").innerHTML="Weather in "+ciety+", "+country;
                 document.getElementById("weather-description").innerHTML=data.weather[0].description;
                 document.getElementById("degrees").innerHTML=data.main.temp+" °C, feels like: "+data.main.feels_like+" °C";
+                // uur en datum afspelen van die plek
 // alles in een var steken en dan onclick tonen
-/*
-               let tabell="<table><tr><td>wind</td><td>"++"</td></tr> // er nog uithalen
-                <tr><td>Cloudiness</td><td>"+data[0].description+"</td></tr> // nog eens checken
-                <tr><td>Pressure</td><td>"+main.pressure+" hpa</td></tr>
-                <tr><td>Humidity</td><td>"+data.main.humidity+" %</td></tr>
-                <tr><td>Rain</td><td>"+data.weather[0].description+"</td></tr>
-                <tr><td>Sunrise</td><td>"++"</td></tr>
-                <tr><td>Sunset</td><td>"++"</td></tr>
-                <tr><td>Geo coord</td><td>lon.: "++"lat.: "++"</td></tr></table>"; */
 
-              //  document.getElementById("tabel").innerHTML=tabell;
+               let tabell="<table><tr><td>wind</td><td>speed: "+data.wind.speed+"</td></tr><tr><td>Cloudiness</td><td>"+data.weather[0].description+"</td></tr><tr><td>Pressure</td><td>"+data.main.pressure+" hpa</td></tr><tr><td>Humidity</td><td>"+data.main.humidity+" %</td></tr> <tr><td>Rain</td><td>"+data.weather[0].description+"</td></tr> <tr><td>Sunrise</td><td> </td></tr><tr><td>Sunset</td><td></td></tr><tr><td>Geo coord</td><td>longitude: "+data.coord.lon+" - latitude: "+data.coord.lat+"</td></tr></table>";
 
-             /*   letweektabel="<table><tr><td>city.city.timezone</td><td>min temp: "+data.main.temp_min+"C°, max temp "+data.main.temp_max+"C°</td></tr></table>" // dit kan eigenlijk ook in een lus
+              document.getElementById("tabel").innerHTML=tabell;
+
+             /*   letweektabel="<table><tr><td>data.city.city.timezone data.weather.icon</td><td>min temp: "+data.main.temp_min+"C°, max temp "+data.main.temp_max+"C°</td></tr></table>" // dit kan eigenlijk ook in een lus
                               <tr><td></td><td></td></tr>
                                <tr><td></td><td></td></tr>
                                <tr><td></td><td></td></tr>
-                               <tr><td></td><td></td></tr>ls
-                               
+                               <tr><td></td><td></td></tr>
+
                 </table>" */
                 alert(data.coord.lon);
-
-                alert(data.main.humidity+" %");
-                alert(data.main.pressure+" %");
-                //alert(data.0.description);
             });
 
 
