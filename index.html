@@ -8,15 +8,18 @@
 <body>
 <div class="container">
     <header>
-        <h1>BeCode / JavaScript</h1>
-        <h2>Weather Forecast</h2>
+        <h1>Current weather and forecasts in your city</h1>
     </header>
     <div class="content">
-        <section class="material">
+        <H1 id="forcast-title"></H1>
+        <H3 id="degrees"></H3>
+        <p id="weather-description"></p>
+        <div id="tabel"></div>
+        <section class="form">
             <form action="#" method="post">
                 <div class="field dob">
                     <label for="city">Enter your city of choice here:</label>
-                    <input type="text" name="name" id="city" />
+                    <input type="text" name="name" id="city" size="12" placeholder="Brussels" /> and your country here: <input type="text" name="name" id="country" size="3" placeholder="be" />
                 </div>
                 <div class="actions">
                     <button type="button" id="run">Run the script</button>
