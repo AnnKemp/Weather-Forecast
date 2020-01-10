@@ -1,9 +1,21 @@
 (() => {
+    // luisteren naar de klik op de knop
     document.getElementById("run").addEventListener("click", function(){
 
+        // de stad naar keuze ingeven in het invulveld en deze gegevens ophalen
         let ciety=document.getElementById("city").value;
+        let country=document.getElementById("country").value;
 
-        fetch("http://api.openweathermap.org/data/2.5/weather?q=Brussels,be&APPID=7169f5bedeb8da197f07b8c4e02cde4d")
+        // het opsplitsen van de api-link om zo een stad naar keuze te kunnen toevoegen/selecteren
+        let city="q="+ciety+","+country;
+        let key="&APPID=7169f5bedeb8da197f07b8c4e02cde4d";
+        let start="http://api.openweathermap.org/data/2.5/weather?"
+
+        // deze concateneren
+        let apiCity=start+city+key;
+
+        // api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
+        fetch(apiCity)
 
             .then((response) => {
                 return response.json();
@@ -15,8 +27,6 @@
 
         //7169f5bedeb8da197f07b8c4e02cde4d // de personal key uit de mail
         // 7c998263790686fb082bdb3d6a532182    // my personal key for weather app
-        // search city by name
-        // api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
 
         //api.openweathermap.org/data/2.5/find?q=London&units=metric //voorbeeld voor het ophalen van temperatuur in celsius
 
