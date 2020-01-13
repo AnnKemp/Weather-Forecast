@@ -29,7 +29,7 @@
                 country = country.toUpperCase();
                 document.getElementById("forcast-title").innerHTML="The weather in "+ciety+", "+country;
                 document.getElementById("weather-description").innerHTML=data.weather[0].description;
-                document.getElementById("degrees").innerHTML=data.main.temp+" °C, feels like: "+data.main.feels_like+" °C";
+                document.getElementById("degrees").innerHTML="Today: "+data.main.temp+" °C, feels like: "+data.main.feels_like+" °C";
                 // uur en datum afspelen van die plek
                 // zonsopgang:
                 let date = new Date(data.sys.sunrise*1000);
@@ -37,7 +37,7 @@
                 let hours = date.getHours();
 // Minutes part from the timestamp
                 let minutes = "0" + date.getMinutes();
-// Will display time in 10:30:23 format   // why -2
+// Will display time in 10:30:23 format
                 let sunrise = hours + ':' + minutes.substr(-2);
 
                 // zonsondergang:
@@ -55,19 +55,52 @@
 
               document.getElementById("tabel").innerHTML=tabell;
 
-             /*   letweektabel="<table><tr><td>data.city.city.timezone data.weather.icon</td><td>min temp: "+data.main.temp_min+"C°, max temp "+data.main.temp_max+"C°</td></tr></table>" // dit kan eigenlijk ook in een lus
-                              <tr><td></td><td></td></tr>
-                               <tr><td></td><td></td></tr>
-                               <tr><td></td><td></td></tr>
-                               <tr><td></td><td></td></tr>
-
-                </table>" */
             });
+
+                let startforcast="http://api.openweathermap.org/data/2.5/forecast?"
+                let forcast=startforcast+city+key;
+
+                // api.openweathermap.org/data/2.5/forecast?q={city name},{country code}
+                fetch(forcast)
+
+                    .then((response) => {
+                        return response.json();
+                    })
+
+                    .then((data) => {
+                        console.log(data);
+
+                        // de dag van vandaag er uit halen
+                        let today=data.list[0].dt_txt;
+                        let datum = today.split("-");
+                        let dag=datum[2];
+                        let daag = dag.split(" ");
+                        let vandaag=daag[0];
+
+                        let temp="min temp: "+data.list[0].main.temp_min+"C°, max temp "+data.list[0].main.temp_max+"C°";
+                        alert(temp);
+                        let d = new Date();
+                        alert(d);
+                      let x = d.toString();
+                      let datu = x.substring(0,15);
+                      // nu schrijven voor de dag van vandaag: het uur er uithalen als vandat tot dat uur list[]=3;
+                       // anders list[]=0; etc . . .
+
+             let i=0;
+             let weektabel="<table>";
+
+              // While(i<=45){
+                weektabel+="<tr><td>"+datu+"<br />Today</td><td>"+data.list[0].weather[0].icon+"</td><td>min temp: "+data.list[0].main.temp_min+" C°, max temp: "+data.list[0].main.temp_max+" C°<br />humidity: "+data.list[0].main.humidity+" %</td><td>"+data.list[0].weather[0].description+"<br />"+data.list[0].main.pressure+" hpa</td></tr>";
+              //    i=i+9;
+            //
+                weektabel+="</table>"
+
+              document.getElementById("foreCastForWeek").innerHTML=weektabel;
 
       // nog schrijven: indien niets ingevuld in invulveld: errorr melding geven
 
 
-
+                    })
         //-------------------------------for working with axios ---------------------------------------------------------------------------------------------------
 //will now provide autocomplete and parameter typings
         /*
