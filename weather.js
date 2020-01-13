@@ -70,19 +70,55 @@
                     .then((data) => {
                         console.log(data);
 
-                        // de dag van vandaag er uit halen
+                        // de dag van vandaag er uit het weather-object halen
                         let today=data.list[0].dt_txt;
                         let datum = today.split("-");
                         let dag=datum[2];
                         let daag = dag.split(" ");
                         let vandaag=daag[0];
 
-                        let temp="min temp: "+data.list[0].main.temp_min+"C°, max temp "+data.list[0].main.temp_max+"C°";
-                        alert(temp);
+                        // om de datum van vandaag met jaar etc. te tonen in de html
                         let d = new Date();
-                        alert(d);
-                      let x = d.toString();
-                      let datu = x.substring(0,15);
+                        let x = d.toString();
+                        let datu = x.substring(0,15);
+
+                        // om dynamisch de dag van vandaag op te halen
+                        var c = d.getDate();
+                        //var uur = d.getHours();
+                        var maand=d.getMonth();
+                        var jaar=d.getFullYear();
+
+                        // de datum van morgen dynamisch op te vragen om te tonen
+                        var morgen_1 = new Date(jaar, maand, c+1);
+                        let u = morgen_1.toString();
+                        let morgen = u.substring(0,15);
+
+                        // de datum van overmorgen dynamisch op te vragen om te tonen
+                        var morgen_2 = new Date(jaar, maand, c+2);
+                        let t = morgen_2.toString();
+                        let overmorgen = t.substring(0,15);
+
+                        // de datum van betovermorgen dynamisch op te vragen om te tonen
+                        var morgen_2 = new Date(jaar, maand, c+3);
+                        let o = morgen_2.toString();
+                        let betovermorgen = o.substring(0,15);
+
+                        var morgen_3 = new Date(jaar, maand, c+4);
+                        let ou = morgen_3.toString();
+                        let bebetovermorgen = ou.substring(0,15);
+
+                        //dt_txt: "2020-01-13 15:00:00" // het uur er uit halen
+                        //let heure = today.split(" ");
+                        //let uuur=heure[1];
+
+                       // let daag = heure[1].split(":");
+                       // let r=daag[0];
+                        //alert(r);
+
+                   if(c==vandaag){
+
+
+                      }
                       // nu schrijven voor de dag van vandaag: het uur er uithalen als vandat tot dat uur list[]=3;
                        // anders list[]=0; etc . . .
 
@@ -91,7 +127,12 @@
 
               // While(i<=45){
                 weektabel+="<tr><td>"+datu+"<br />Today</td><td>"+data.list[0].weather[0].icon+"</td><td>min temp: "+data.list[0].main.temp_min+" C°, max temp: "+data.list[0].main.temp_max+" C°<br />humidity: "+data.list[0].main.humidity+" %</td><td>"+data.list[0].weather[0].description+"<br />"+data.list[0].main.pressure+" hpa</td></tr>";
-              //    i=i+9;
+               weektabel+="<tr><td>"+morgen+"<br /></td><td>"+data.list[9].weather[0].icon+"</td><td>min temp: "+data.list[9].main.temp_min+" C°, max temp: "+data.list[9].main.temp_max+" C°<br />humidity: "+data.list[9].main.humidity+" %</td><td>"+data.list[9].weather[0].description+"<br />"+data.list[9].main.pressure+" hpa</td></tr>";
+               weektabel+="<tr><td>"+overmorgen+"<br /></td><td>"+data.list[18].weather[0].icon+"</td><td>min temp: "+data.list[18].main.temp_min+" C°, max temp: "+data.list[18].main.temp_max+" C°<br />humidity: "+data.list[18].main.humidity+" %</td><td>"+data.list[18].weather[0].description+"<br />"+data.list[18].main.pressure+" hpa</td></tr>";
+               weektabel+="<tr><td>"+betovermorgen+"<br /></td><td>"+data.list[27].weather[0].icon+"</td><td>min temp: "+data.list[27].main.temp_min+" C°, max temp: "+data.list[27].main.temp_max+" C°<br />humidity: "+data.list[27].main.humidity+" %</td><td>"+data.list[27].weather[0].description+"<br />"+data.list[27].main.pressure+" hpa</td></tr>";
+               weektabel+="<tr><td>"+bebetovermorgen+"<br /></td><td>"+data.list[36].weather[0].icon+"</td><td>min temp: "+data.list[36].main.temp_min+" C°, max temp: "+data.list[36].main.temp_max+" C°<br />humidity: "+data.list[36].main.humidity+" %</td><td>"+data.list[36].weather[0].description+"<br />"+data.list[36].main.pressure+" hpa</td></tr>";
+
+                        //    i=i+9;
             //
                 weektabel+="</table>"
 
