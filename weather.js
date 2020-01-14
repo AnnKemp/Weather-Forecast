@@ -1,7 +1,23 @@
 (() => {
+    // keys for the weather app :
+
     //7169f5bedeb8da197f07b8c4e02cde4d // de personal key uit de mail
     // 7c998263790686fb082bdb3d6a532182    // my personal key for weather app
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+    // keys for the UNSPLASh photo app
+//    3a2307f9688e470b2c3f18f71f6847ccfbe48f8bfaa0282d6a69e9dbcdcc9a80   // Access key
+
+//    18e3996f2e52a3ae76de84d448361a09082dcb61093acb6c79e5d5997c324de3     // secret key
+
+    //Redirect URI   (optional for applications that are only using the 'Public' permissions)
+    //       urn:ietf:wg:oauth:2.0:oob
+
+    //White-listed addresses to redirect to after authentication success OR failure (e.g. https://mysite.com/callback)
+    //Use one line per URI
+   // Use urn:ietf:wg:oauth:2.0:oob for local tests
+    //     urn:ietf:wg:oauth:2.0:oob (Authorize)
+    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // luisteren naar de klik op de knop - onclick . . .
     document.getElementById("run").addEventListener("click", function(){
 
@@ -128,29 +144,37 @@
                         let humi=0;
                         let pressu=0;
 
-                        function gegevensOphalen(i){
+                        let y=0;
+                        let z=0;
+                        let e=0;
+                        let r=0;
+                        let q=0;
+
+                        // function to calculate the average
+                        function gegevensOphalen(i, y){
                             min+=data.list[i].main.temp_min;
                             max+=data.list[i].main.temp_max;
                             humi+=data.list[i].main.humidity;
                             pressu+=data.list[i].main.pressure;
 
-                            let averagePressu=pressu/8;
-                            averagePressu=Math.round(averagePressu);
+                            if(i==y){
+                                // 8 moet nog vervangen worden door de length van y.length
+                                let averagePressu=pressu/y;
+                                averagePressu=Math.round(averagePressu);
 
-                            let averageMin=min/8;
-                            averageMin=Math.round(averageMin);
+                                let averageMin=min/y;
+                                averageMin=Math.round(averageMin);
 
-                            let averageMax=max/8;
-                            averageMax=Math.round(averageMax);
+                                let averageMax=max/y;
+                                averageMax=Math.round(averageMax);
 
-                            let averageHumi=humi/8;
-                            averageHumi=Math.round(averageHumi);
+                                let averageHumi=humi/y;
+                                averageHumi=Math.round(averageHumi);
 
-                         console.log(averageMin+"-"+averageMax+"-"+averageHumi); // dit werkt
-
-                         return "<td>"+data.list[i].weather[0].icon+"</td><td>min temp: "+averageMin+" C°, max temp: "+averageMax+" C°<br />humidity: "+averageHumi+" %</td><td>"+data.list[i].weather[0].description+"<br />"+averagePressu+" hpa</td></tr>";
+                            let gegevens=[averageMin,averageMax,averageHumi,averagePressu];
+                            return gegevens;
                         }
-                        let weektabel_2="<table>";
+                  }
 
                     // de array aflopen om de gegevens er uit te halen
                     for (i=0;i<40;i++){
@@ -162,20 +186,37 @@
                         let vandaag_2=daag_2[0];
 
                         if (c == vandaag_2) {
-                            weektabel_2+="<tr><td>"+datu+"<br />Today</td><td>"+data.list[0].weather[0].icon+"</td><td>min temp: "+data.list[0].main.temp_min+" C°, max temp: "+data.list[0].main.temp_max+" C°<br />humidity: "+data.list[0].main.humidity+" %</td><td>"+data.list[0].weather[0].description+"<br />"+data.list[0].main.pressure+" hpa</td></tr>";
+                                    y+=y;
+                                    let gegevens_vandaag=gegevensOphalen(i,y);
 
                         } else if (c+1 == (parseInt(vandaag_2))) {
-                            weektabel_2+="<tr><td>"+morgen+"<br /></td>"+gegevensOphalen(i);
+                                    z+=z;
+                                    let gegevens_morgen=gegevensOphalen(i,z);
                         } else if (c+2 == (parseInt(vandaag_2))) {
-                            weektabel_2+="<tr><td>"+overmorgen+"<br /></td>"+gegevensOphalen(i);
+                                    e+=e;
+                                    let gegevens_overmorgen=gegevensOphalen(i,e);
                         } else if (c+3 == (parseInt(vandaag_2))) {
-                            weektabel_2+="<tr><td>"+betovermorgen+"<br /></td>"+gegevensOphalen(i);
+                                    r+=r;
+                                    let gegevens_betovermorgen=gegevensOphalen(i,r);
                         } else if (c+4 == (parseInt(vandaag_2))) {
-                            weektabel_2+="<tr><td>"+bebetovermorgen+"<br /></td>"+gegevensOphalen(i);
+                                    q+=q;
+                                    let gegevens_bebetovermorgen=gegevensOphalen(i,q);
                         } else {
-
+                            break;
                         }
                     }
+
+                        let weektabel_2="<table>";
+
+                        console.log(gegevens_vandaag[0]); //
+                       // let gegevens=[averageMin,averageMax,averageHumi,averagePressu]; efkens om de volgorde te weten
+/*
+                        weektabel_2+="<tr><td>"+datu+"<br />Today</td><td>"+data.list[0].weather[0].icon+"</td><td>min temp: "+gegevens_vandaag[0]+" C°, max temp: "gegevens_vandaag[1]+" C°<br />humidity: "+gegevens_vandaag[2]+" %</td><td>"+data.list[0].weather[0].description+"<br />"+gegevens_vandaag[3]+" hpa</td></tr>";
+                        weektabel_2+="<tr><td>"+morgen+"<br /></td><td>"+data.list[i].weather[0].icon+"</td><td>min temp: "+gegevens_morgen[0]+" C°, max temp: "+gegevens_morgen[1]+" C°<br />humidity: "+gegevens_morgen[2]+" %</td><td>"+data.list[i].weather[0].description+"<br />"+gegevens_morgen[3]+" hpa</td></tr>";
+                        weektabel_2+="<tr><td>"+overmorgen+"<br /></td>"+data.list[i].weather[0].icon+"</td><td>min temp: "gegevens_overmorgen[0]+" C°, max temp: "+gegevens_overmorgen[1]+" C°<br />humidity: "+gegevens_overmorgen[2]+" %</td><td>"+data.list[i].weather[0].description+"<br />"+gegevens_overmorgen[3]+" hpa</td></tr>";
+                        weektabel_2+="<tr><td>"+betovermorgen+"<br /></td>"+data.list[i].weather[0].icon+"</td><td>min temp: "+gegevens_betovermorgen[0]+" C°, max temp: "+gegevens_betovermorgen[1]+" C°<br />humidity: "+gegevens_betovermorgen[2]+" %</td><td>"+data.list[i].weather[0].description+"<br />"+gegevens_betovermorgen[3]+" hpa</td></tr>";
+                        weektabel_2+="<tr><td>"+bebetovermorgen+"<br /></td>"+data.list[i].weather[0].icon+"</td><td>min temp: "+bebetovermorgen[0]+" C°, max temp: "+bebetovermorgen[1]+" C°<br />humidity: "+bebetovermorgen[2]+" %</td><td>"+data.list[i].weather[0].description+"<br />"+bebetovermorgen[3]+" hpa</td></tr>";
+*/
                         weektabel_2+="</table>";
 
  // ------------------------------------------eerste werkende poging om de gegevens van vijf weekdagen te tonen, deze waarden zijn echter nog geen dag-gemiddelden ---------------------------------------------------------------------------------------
@@ -228,5 +269,14 @@
                         // always executed
                     });
         */
+  //-------------------------------------------------------------------code snippets for unsplash---------------------------------------------------------------------------------------------------
+     /*
+
+      unsplash.search.photos("weather", 1, 1, { orientation: "landscape" })
+            .then(toJson)
+            .then(json => {
+                // Your code
+            }); */
+
     }); //  einde onclick
 })();
